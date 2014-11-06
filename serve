@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Server configuration
+SERVER_DIR=$(mktemp -d -t jekyll-proxy)
+SERVER_LIBDIR=/usr/libexec/apache2
+SERVER_PORT=4000
+
+# Start generating the httpd.conf file
+cat > "$SERVER_DIR/httpd.conf" << EOL
+ServerName localhost
+Listen $((SERVER_PORT++))
+DefaultRuntimeDir .
+PidFile httpd.pid
+ErrorLog error_log
+LoadModule unixd_module $SERVER_LIBDIR/mod_unixd.so
+LoadModule authn_core_module $SERVER_LIBDIR/mod_authn_core.so
+LoadModule authz_core_module $SERVER_LIBDIR/mod_authz_core.so
+LoadModule proxy_module $SERVER_LIBDIR/mod_proxy.so
+LoadModule proxy_http_module $SERVER_LIBDIR/mod_proxy_http.so
+KeepAliveTimeout 0
+EOL
+
+# Function to start Jekyll $1=source dir, $2=baseurl
+function start_jekyll {
+	pushd "$1" > /dev/null
+	bundle exec jekyll serve --detach --baseurl "$2" --port 0
+	popd > /dev/null
+	cat >> "$SERVER_DIR/httpd.conf" << EOL
+ProxyPass $2/ http://localhost:$(lsof -p `pgrep -fn jekyll` -a -i -Fn | awk -F: '/^n\*:/ {print $2}')$2/
+<Location $2/>
+  ProxyPassReverse /
+  AuthType None
+  Require all granted
+</Location>
+EOL
+	echo
+}
+
+# Start the Jekyll servers for each of the project sites
+start_jekyll "$(pwd)/../configuration" "/configuration"
+start_jekyll "$(pwd)" ""
+
+# Start the proxy server
+echo "  Server directory: $SERVER_DIR"
+echo "    Server address: http://localhost:$SERVER_PORT/"
+apachectl -X -f httpd.conf -d "$SERVER_DIR"
+echo
+
+# Proxy server was killed, clean up the temporary directory and kill the Jekyll servers
+rm -rf "$SERVER_DIR"
+pkill -9 -f jekyll
