@@ -8,7 +8,7 @@ SERVER_PORT=4000
 # Start generating the httpd.conf file
 cat > "$SERVER_DIR/httpd.conf" << EOL
 ServerName localhost
-Listen $((SERVER_PORT++))
+Listen $SERVER_PORT
 DefaultRuntimeDir .
 PidFile httpd.pid
 ErrorLog error_log
@@ -23,17 +23,20 @@ EOL
 # Function to start Jekyll $1=source dir, $2=baseurl
 function start_jekyll {
 	pushd "$1" > /dev/null
-	bundle exec jekyll serve --detach --baseurl "$2" --port 0
+	bundle exec jekyll serve --baseurl "$2" --port 0 &
+	JEKYLL_PID=$!
+	sleep 1
+	JEKYLL_PORT=`lsof -p $JEKYLL_PID -a -i -Fn | awk -F: '/^n\*:/ {print $2}'`
+	echo "GOT PID $JEKYLL_PID AND PORT $JEKYLL_PORT"
 	popd > /dev/null
 	cat >> "$SERVER_DIR/httpd.conf" << EOL
-ProxyPass $2/ http://localhost:$(lsof -p `pgrep -fn jekyll` -a -i -Fn | awk -F: '/^n\*:/ {print $2}')$2/
+ProxyPass $2/ http://localhost:$JEKYLL_PORT$2/
 <Location $2/>
   ProxyPassReverse /
   AuthType None
   Require all granted
 </Location>
 EOL
-	echo
 }
 
 # Start the Jekyll servers for each of the project sites
@@ -44,8 +47,7 @@ start_jekyll "$(pwd)" ""
 echo "  Server directory: $SERVER_DIR"
 echo "    Server address: http://localhost:$SERVER_PORT/"
 apachectl -X -f httpd.conf -d "$SERVER_DIR"
-echo
 
 # Proxy server was killed, clean up the temporary directory and kill the Jekyll servers
 rm -rf "$SERVER_DIR"
-pkill -9 -f jekyll
+pkill -SIGKILL -f jekyll
