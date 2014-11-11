@@ -1,0 +1,21 @@
+/* Different link behavior for main nav */
+.navbar-default .navbar-main>.active>a, .navbar-default .navbar-main>.active>a:focus {
+  color: #777;
+  background-color: transparent;
+}
+.navbar-default .navbar-main>.active>a:hover {
+  color: #333;
+  background-color: transparent;
+}
+
+/* Put a separator between main and sub nav */
+.navbar-static-top > .container-fluid:first-child {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+/* Shrink subnav */
+.navbar-sub > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 12px;
+}
