@@ -22,15 +22,18 @@ EOL
 
 # Function to start Jekyll $1=source dir, $2=baseurl
 function start_jekyll {
+	local JEKYLL_BASEURL=$2
 	pushd "$1" > /dev/null
-	bundle exec jekyll serve --baseurl "$2" --port 0 &
-	JEKYLL_PID=$!
-	sleep 1
-	JEKYLL_PORT=`lsof -p $JEKYLL_PID -a -i -Fn | awk -F: '/^n\*:/ {print $2}'`
+	bundle exec jekyll serve --baseurl "$JEKYLL_BASEURL" --port 0 &
+	local JEKYLL_PID=$!
+	local JEKYLL_PORT=
+	while [ -z "$JEKYLL_PORT" ]; do
+		JEKYLL_PORT=`lsof -p $JEKYLL_PID -a -i -Fn | awk -F: '/^n\*:/ {print $2}'`
+	done
 	popd > /dev/null
 	cat >> "$SERVER_DIR/httpd.conf" << EOL
-ProxyPass $2/ http://localhost:$JEKYLL_PORT$2/
-<Location $2/>
+ProxyPass $JEKYLL_BASEURL/ http://localhost:$JEKYLL_PORT$JEKYLL_BASEURL/
+<Location $JEKYLL_BASEURL/>
   ProxyPassReverse /
   AuthType None
   Require all granted
