@@ -1,3 +1,16 @@
 title: Code Seed
 tagline: Tools for growing beautiful code.
 exclude: [ serve ]
+kramdown:
+  input: GFM
+defaults:
+  -
+    scope:
+      path: "configuration"
+    values:
+      layout: "project"
+      baseurl: "/configuration"
+      github:
+        releases_url: "https://github.com/CodeSeed/configuration/releases"
+        repository_url: "https://github.com/CodeSeed/configuration"
+        issues_url: "https://github.com/CodeSeed/configuration/issues"

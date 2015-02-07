@@ -1,0 +1,22 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ site.title }}{% if page.title %} ⚒ {{ page.title }}{% endif %}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ site.rooturl }}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ site.rooturl }}/css/project.css" rel="stylesheet">
+    <link href="{{ site.rooturl }}/css/syntax.css" rel="stylesheet">
+  </head>
+  <body>
+    {% include navbar.html %}
+    <div class="container">
+      {{ content }}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ site.rooturl }}/js/bootstrap.min.js"></script>
+  </body>
+</html>
