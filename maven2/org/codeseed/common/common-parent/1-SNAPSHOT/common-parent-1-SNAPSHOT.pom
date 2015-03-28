@@ -27,8 +27,11 @@
 
   <properties>
     <guavaVersion>18.0</guavaVersion>
-    <testngVersion>6.8.8</testngVersion>
     <jsr305Version>1.3.9</jsr305Version>
+
+    <testngVersion>6.8.8</testngVersion>
+    <truthVersion>0.25</truthVersion>
+    <compileTestingVersion>0.6</compileTestingVersion>
   </properties>
 
   <dependencyManagement>
@@ -43,6 +46,19 @@
         <artifactId>jsr305</artifactId>
         <version>${jsr305Version}</version>
       </dependency>
+
+      <!-- Test dependencies -->
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testngVersion}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.truth</groupId>
+        <artifactId>truth</artifactId>
+        <version>${truthVersion}</version>
+      </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava-testlib</artifactId>
@@ -50,9 +66,9 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>${testngVersion}</version>
+        <groupId>com.google.testing.compile</groupId>
+        <artifactId>compile-testing</artifactId>
+        <version>${compileTestingVersion}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
@@ -82,6 +98,9 @@
             <encoding>UTF-8</encoding>
             <source>1.8</source>
             <target>1.8</target>
+            <compilerArgument>-Xlint:all</compilerArgument>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
           </configuration>
         </plugin>
         <plugin>
