@@ -29,9 +29,10 @@
     <guavaVersion>18.0</guavaVersion>
     <jsr305Version>1.3.9</jsr305Version>
 
-    <testngVersion>6.8.8</testngVersion>
+    <!-- Test dependencies -->
+    <junitVersion>4.12</junitVersion>
     <truthVersion>0.25</truthVersion>
-    <compileTestingVersion>0.6</compileTestingVersion>
+    <compileTestingVersion>0.7</compileTestingVersion>
   </properties>
 
   <dependencyManagement>
@@ -49,15 +50,16 @@
 
       <!-- Test dependencies -->
       <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>${testngVersion}</version>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junitVersion}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.google.truth</groupId>
         <artifactId>truth</artifactId>
         <version>${truthVersion}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
@@ -93,7 +95,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.2</version>
+          <version>3.3</version>
           <configuration>
             <encoding>UTF-8</encoding>
             <source>1.8</source>
@@ -134,7 +136,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.2</version>
+          <version>2.10.3</version>
           <configuration>
             <encoding>UTF-8</encoding>
             <nodeprecatedlist>true</nodeprecatedlist>
