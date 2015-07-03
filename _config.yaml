@@ -1,5 +1,5 @@
 title: Code Seed
-tagline: Tools for growing beautiful code.
+tagline: Grow beautiful code.
 exclude: [ serve ]
 kramdown:
   input: GFM
@@ -14,3 +14,13 @@ defaults:
         releases_url: "https://github.com/CodeSeed/configuration/releases"
         repository_url: "https://github.com/CodeSeed/configuration"
         issues_url: "https://github.com/CodeSeed/configuration/issues"
+  -
+    scope:
+      path: "craftsman"
+    values:
+      layout: "project"
+      baseurl: "/craftsman"
+      github:
+        releases_url: "https://github.com/CodeSeed/craftsman/releases"
+        repository_url: "https://github.com/CodeSeed/craftsman"
+        issues_url: "https://github.com/CodeSeed/craftsman/issues"

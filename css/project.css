@@ -1,6 +1,6 @@
 /* Different link behavior for main nav */
 .navbar-default .navbar-main>.active>a, .navbar-default .navbar-main>.active>a:focus {
-  color: #777;
+  color: #333;
   background-color: transparent;
 }
 .navbar-default .navbar-main>.active>a:hover {

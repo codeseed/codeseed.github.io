@@ -4,7 +4,8 @@
       <a class="navbar-brand" href="{{ site.rooturl }}/">Code Seed</a>
     </div>
     <ul class="nav navbar-nav navbar-main">
-      <li class="active"><a href="{{ site.rooturl }}/configuration/">Configuration</a></li>
+      <li{% if page.baseurl == '/configuration' %} class="active"{% endif %}><a href="{{ site.rooturl }}/configuration/">Configuration</a></li>
+      <li{% if page.baseurl == '/craftsman' %} class="active"{% endif %}><a href="{{ site.rooturl }}/craftsman/">Craftsman</a></li>
     </ul>
   </div>
   <div class="container-fluid">
