@@ -32,7 +32,6 @@
     <!-- Test dependencies -->
     <junitVersion>4.12</junitVersion>
     <truthVersion>0.27</truthVersion>
-    <compileTestingVersion>0.7</compileTestingVersion>
     <mockitoVersion>1.10.19</mockitoVersion>
   </properties>
 
@@ -66,12 +65,6 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava-testlib</artifactId>
         <version>${guavaVersion}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.testing.compile</groupId>
-        <artifactId>compile-testing</artifactId>
-        <version>${compileTestingVersion}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
