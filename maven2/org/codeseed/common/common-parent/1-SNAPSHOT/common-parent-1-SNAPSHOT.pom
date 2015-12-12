@@ -26,13 +26,13 @@
   </developers>
 
   <properties>
-    <guavaVersion>18.0</guavaVersion>
+    <guavaVersion>19.0</guavaVersion>
     <jsr305Version>1.3.9</jsr305Version>
     <threeTenVersion>0.9</threeTenVersion>
 
     <!-- Test dependencies -->
     <junitVersion>4.12</junitVersion>
-    <truthVersion>0.27</truthVersion>
+    <truthVersion>0.28</truthVersion>
     <mockitoVersion>1.10.19</mockitoVersion>
   </properties>
 
@@ -96,7 +96,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>2.6.1</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -127,7 +127,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.18.1</version>
+          <version>2.19</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -137,7 +137,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>2.4.1</version>
+          <version>2.4.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -160,7 +160,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-eclipse-plugin</artifactId>
-          <version>2.9</version>
+          <version>2.10</version>
           <configuration>
             <downloadSources>true</downloadSources>
           </configuration>
