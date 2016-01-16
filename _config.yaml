@@ -1,6 +1,5 @@
 title: Code Seed
 tagline: Grow beautiful code.
-exclude: [ serve ]
 kramdown:
   input: GFM
 defaults:
