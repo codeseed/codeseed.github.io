@@ -2,24 +2,3 @@ title: Code Seed
 tagline: Grow beautiful code.
 kramdown:
   input: GFM
-defaults:
-  -
-    scope:
-      path: "configuration"
-    values:
-      layout: "project"
-      baseurl: "/configuration"
-      github:
-        releases_url: "https://github.com/CodeSeed/configuration/releases"
-        repository_url: "https://github.com/CodeSeed/configuration"
-        issues_url: "https://github.com/CodeSeed/configuration/issues"
-  -
-    scope:
-      path: "craftsman"
-    values:
-      layout: "project"
-      baseurl: "/craftsman"
-      github:
-        releases_url: "https://github.com/CodeSeed/craftsman/releases"
-        repository_url: "https://github.com/CodeSeed/craftsman"
-        issues_url: "https://github.com/CodeSeed/craftsman/issues"
